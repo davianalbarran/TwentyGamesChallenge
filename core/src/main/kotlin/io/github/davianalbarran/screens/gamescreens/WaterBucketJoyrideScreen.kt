@@ -10,14 +10,6 @@ class WaterBucketJoyrideScreen(
         TODO("Not yet implemented")
     }
 
-    override fun pause() {
-        TODO("Not yet implemented")
-    }
-
-    override fun resume() {
-        TODO("Not yet implemented")
-    }
-
     override fun hide() {
         TODO("Not yet implemented")
     }
@@ -26,15 +18,15 @@ class WaterBucketJoyrideScreen(
         TODO("Not yet implemented")
     }
 
-    override fun input() {
+    override fun input(delta: Float) {
         TODO("Not yet implemented")
     }
 
-    override fun logic() {
+    override fun logic(delta: Float) {
         TODO("Not yet implemented")
     }
 
-    override fun draw() {
+    override fun draw(delta: Float) {
         TODO("Not yet implemented")
     }
 }

@@ -2,6 +2,7 @@ package io.github.davianalbarran.screens.gamescreens
 
 import com.badlogic.gdx.Screen
 import io.github.davianalbarran.TwentyGameChallenge
+import io.github.davianalbarran.screens.PauseScreen
 
 sealed class TwentyGameScreen(
     val game : TwentyGameChallenge
@@ -10,9 +11,9 @@ sealed class TwentyGameScreen(
     var isPaused: Boolean = false
 
     override fun render(delta: Float) {
-        input()
-        if (!isPaused) logic()
-        draw()
+        input(delta)
+        if (!isPaused) logic(delta)
+        draw(delta)
     }
 
     override fun resize(width: Int, height: Int) {
@@ -21,12 +22,11 @@ sealed class TwentyGameScreen(
 
     override fun pause() {
         isPaused = true
-        print("paused")
+        game.screen = PauseScreen(game, this)
     }
 
     override fun resume() {
         isPaused = false
-        print("resumed")
     }
 
     abstract override fun hide()
@@ -34,7 +34,7 @@ sealed class TwentyGameScreen(
     abstract override fun dispose()
 
     ///// UTILITY METHODS /////
-    abstract fun input()
-    abstract fun logic()
-    abstract fun draw()
+    abstract fun input(delta: Float)
+    abstract fun logic(delta: Float)
+    abstract fun draw(delta: Float)
 }

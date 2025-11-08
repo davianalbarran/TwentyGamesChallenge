@@ -78,7 +78,7 @@ class WaterDropScreen(// todo: separate each game
     }
 
     //////// UTILITY METHODS ////////
-    override fun input() {
+    override fun input(delta: Float) {
         val speed = 5f
         val delta = Gdx.graphics.deltaTime
 
@@ -94,7 +94,7 @@ class WaterDropScreen(// todo: separate each game
             if (isPaused) resume() else pause()
     }
 
-    override fun logic() {
+    override fun logic(delta: Float) {
         val worldWidth = game.viewport!!.worldWidth
 
         val delta = Gdx.graphics.deltaTime
@@ -135,7 +135,7 @@ class WaterDropScreen(// todo: separate each game
         }
     }
 
-    override fun draw() {
+    override fun draw(delta: Float) {
         applyShake(Gdx.graphics.deltaTime)
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f)
         game.viewport!!.apply()
