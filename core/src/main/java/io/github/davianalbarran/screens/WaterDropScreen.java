@@ -10,16 +10,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.davianalbarran.TwentyGameChallenge;
 
 public class WaterDropScreen implements Screen {
     private final TwentyGameChallenge game; // todo: separate each game
-
-    private Stage uiStage;
 
     private Texture background;
     private Texture dropletTexture;
@@ -35,7 +31,6 @@ public class WaterDropScreen implements Screen {
     private Rectangle bucketRectangle;
     private Rectangle dropletRectangle;
 
-    private Label scoreLabel;
     private int score = 0;
 
     private float shakeDuration = 0f;
@@ -80,13 +75,6 @@ public class WaterDropScreen implements Screen {
 
         bucketRectangle = new Rectangle();
         dropletRectangle = new Rectangle();
-
-        Label.LabelStyle style = new Label.LabelStyle(game.gameFont, Color.WHITE);
-        scoreLabel = new Label("Score: 0", style);
-        scoreLabel.setPosition(20, Gdx.graphics.getHeight() - 60); // top-left corner
-
-        uiStage = new Stage();
-        uiStage.addActor(scoreLabel);
     }
 
     @Override
@@ -104,7 +92,7 @@ public class WaterDropScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        game.viewport.update(width, height);
     }
 
     @Override
@@ -177,7 +165,6 @@ public class WaterDropScreen implements Screen {
                 dropSprites.removeIndex(i);
                 dropSound.play();
             }
-            scoreLabel.setText("Score: " + score);
         }
 
         timer += delta;
@@ -204,18 +191,15 @@ public class WaterDropScreen implements Screen {
         for (Drop drop : dropSprites)
             drop.droplet.draw(game.batch);
 
+        game.gameFont.draw(game.batch, "Score: " + score, 0, worldHeight);
+
         if (shakeTintAlpha > 0f) {
             game.batch.setColor(1f, 0f, 0f, shakeTintAlpha);
             game.batch.draw(background, 0, 0, game.viewport.getWorldWidth(), game.viewport.getWorldHeight());
             game.batch.setColor(Color.WHITE);
         }
 
-        scoreLabel.draw(game.batch, 1f);
-
         game.batch.end();
-
-        uiStage.act(Gdx.graphics.getDeltaTime());
-        uiStage.draw();
     }
 
     private void createDroplet() {

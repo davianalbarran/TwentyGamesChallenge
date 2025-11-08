@@ -12,7 +12,7 @@
   <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt" />
   <inherits name="com.badlogic.gdx.controllers" />
   <inherits name="com.badlogic.gdx.controllers.controllers-gwt" />
-  <inherits name="io.github.davianalbarran.Main" />
+  <inherits name="io.github.davianalbarran.TwentyGameChallenge" />
 
   <!-- You must change this if you rename packages later, or rename GwtLauncher. -->
   <entry-point class="io.github.davianalbarran.gwt.GwtLauncher" />
