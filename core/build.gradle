@@ -1,6 +1,16 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+apply plugin: 'kotlin'
+
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
+sourceSets {
+  main.kotlin.srcDirs += 'src/main/kotlin'
+  test.kotlin.srcDirs += 'src/test/kotlin'
+}
+
 dependencies {
+  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
   api "com.badlogicgames.gdx:gdx:$gdxVersion"
   implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
@@ -9,5 +19,11 @@ dependencies {
 
   if(enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
+  }
+}
+
+tasks.withType(KotlinCompile).configureEach {
+  kotlinOptions {
+    jvmTarget = "11"
   }
 }
